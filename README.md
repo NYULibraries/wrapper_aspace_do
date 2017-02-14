@@ -1,6 +1,6 @@
-This is a wrapper script that uses scripts from here: https://github.com/NYULibraries/aspace-do-update to update ArchivesSpace with handle urls and usage statements. 
+This is a wrapper script that uses scripts from [here](https://github.com/NYULibraries/aspace-do-update) to update ArchivesSpace with handle urls and usage statements. 
 
-To run, you need to first set up your credentials files like this: https://github.com/NYULibraries/aspace-do-update#credentials-files and then export an ENV variable to point to the credentials file that you want to use: https://github.com/NYULibraries/aspace-do-update#usage
+To run, you need to first set up your credentials [files](https://github.com/NYULibraries/aspace-do-update#credentials-files) and then export an ENV [variable](https://github.com/NYULibraries/aspace-do-update#usage) to point to the credentials file that you want to use.
 
 Create a gemset from the aspace-do-update scripts.
 
