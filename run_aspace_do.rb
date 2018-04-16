@@ -9,13 +9,14 @@ def allowed
 end
 file = ARGV[0]
 usage = ARGV[1]
-path = ARGV[2] || "/content/prod/rstar/content/fales/mss460/wip/se" 
+path = ARGV[2] 
 if usage.nil?
  raise "Illegal argument. Allowed values are allowed.join(" ")"
 end 
 do_uri_fname = "archival_object_uri"
 handle_fname = "handle" 
-APP_LOCATION="/home/dlib/datta/aspace-do-update/bin"
+# Add path to aspace-do-update/bin script
+APP_LOCATION=""
 updater_script = "aspace-do-update"
 usage = chk_usage(usage)
 handle_prefix = "http://hdl.handle.net/"
