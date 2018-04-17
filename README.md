@@ -11,10 +11,21 @@ Once that is done, create a file with a list of directories from the wip that ne
 We are to update ACM that we are running the script. 
 
 Use the gemset and call the wrapper script with the following parameters:
-`ruby run_aspace_do.rb list_of_dirs.txt wip_path`
+`ruby run_aspace_do.rb <list_of_dirs.txt> <type-of-service> <wip_path>`
+
+##### Acceptable parameters for <type-of-service> are:
+* audio-service
+* video-service
+* image-service
+*  image-thumbnail 
 
 So, for example:
-`ruby run_aspace_do.rb nitrates.txt /path/to/wip/`
+`ruby run_aspace_do.rb nitrates.txt 'image-service' /path/to/wip/` and `nitrates.txt` contains a list of directories like so:
+```
+dir1
+dir2
+```
+
 
 
 
