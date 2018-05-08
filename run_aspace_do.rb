@@ -105,5 +105,5 @@ do_info.each_pair { |k,v|
   unless s.exitstatus == 0
     raise "ERROR! Encountered problem processing #{k} #{v}\noutput: #{o}\nerror: #{e}\nstatus: #{s}"
   end
-  puts o
+  puts "aspace-do-uri: #{o}"
 }
