@@ -1,0 +1,2 @@
+echo "I failed, darn it!" >&2
+exit 1
