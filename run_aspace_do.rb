@@ -21,6 +21,12 @@ def script_usage
 <<END_OF_USAGE
 Usage: $ ruby #{__FILE__} <file with directory list> <usage statement> <path-to-dir-root> 
   e.g., $ ruby #{__FILE__} nitrates.txt 'image-service' /path/to/wips/
+
+  Please note:
+  you must specify the path the the aspace-do-update executable using
+  the environment variable 'RUN_ASPACE_DO_UPDATER_PATH'
+  e.g., 
+  $ export RUN_ASPACE_DO_UPDATER_PATH=/path/to/aspace-do-update/bin/aspace-do-update
 END_OF_USAGE
 end
 
