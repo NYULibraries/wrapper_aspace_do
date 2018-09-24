@@ -9,6 +9,7 @@ ALLOWED_USAGES = %w(audio-service video-service image-service image-thumbnail)
 DO_URI_FNAME   = 'archival_object_uri'
 HANDLE_FNAME   = 'handle'
 HANDLE_PREFIX  = 'http://hdl.handle.net/'
+THUMBNAIL_URL_APPEND = '?urlappend=/mode/thumb'
 
 #------------------------------------------------------------------------------
 # helper methods
@@ -21,6 +22,13 @@ def script_usage
 <<END_OF_USAGE
 Usage: $ ruby #{__FILE__} <file with directory list> <usage statement> <path-to-dir-root> 
   e.g., $ ruby #{__FILE__} nitrates.txt 'image-service' /path/to/wips/
+
+  Valid usage statements:
+  #{ALLOWED_USAGES.inject('') {|str, u| str << "#{u} "}}
+
+  Please note:
+  if the usage statement == 'image-thumbnail', the string '#{THUMBNAIL_URL_APPEND}' will 
+  automatically be appended to the handle url.
 
   Please note:
   you must specify the path the the aspace-do-update executable using
@@ -97,15 +105,16 @@ entries.each { |e|
   do_uri = do_uri.chomp
   handle = File.open("#{e}/#{HANDLE_FNAME}").first
   handle = handle.chomp
+  handle_url = HANDLE_PREFIX + handle + (usage == 'image-thumbnail' ? THUMBNAIL_URL_APPEND : '')
   key = File.basename(e)
-  do_info[key] = [do_uri, HANDLE_PREFIX + handle]
+  do_info[key] = [do_uri, handle_url]
 }
 
 do_info.each_pair { |k,v|
   puts "#{k}: #{v}"
   do_uri = v[0]
-  handle = v[1]
-  cmd = "#{updater_script} -a #{do_uri} -f #{handle} -u #{usage}"
+  handle_url = v[1]
+  cmd = "#{updater_script} -a #{do_uri} -f #{handle_url} -u #{usage}"
   puts cmd
   o, e, s = Open3.capture3(cmd)
   unless s.exitstatus == 0
