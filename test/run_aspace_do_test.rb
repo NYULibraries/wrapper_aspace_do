@@ -21,12 +21,26 @@ class RunAspaceDo < MiniTest::Test
     o, e, s = Open3.capture3(env, "#{COMMAND} #{OK_WIP_LIST_FILE} 'audio-service' #{OK_WIP_PATH}")
     assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
     o_array = o.split("\n")
-    assert('bar: ["bar-uri", "http://hdl.handle.net/bar-handle"]' == o_array[0]) 
+    assert('bar: ["bar-uri", "http://hdl.handle.net/bar-handle"]' == o_array[0])
     assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle -u audio-service" == o_array[1])
-    assert('aspace-do-uri: success!' == o_array[2]) 
-    assert('foo: ["foo-uri", "http://hdl.handle.net/foo-handle"]' == o_array[3]) 
+    assert('aspace-do-uri: success!' == o_array[2])
+    assert('foo: ["foo-uri", "http://hdl.handle.net/foo-handle"]' == o_array[3])
     assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle -u audio-service" == o_array[4])
-    assert('aspace-do-uri: success!' == o_array[5]) 
+    assert('aspace-do-uri: success!' == o_array[5])
+    assert(e == '')
+  end
+
+  def test_valid_invocation_for_thumbnails
+    env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
+    o, e, s = Open3.capture3(env, "#{COMMAND} #{OK_WIP_LIST_FILE} 'image-thumbnail' #{OK_WIP_PATH}")
+    assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
+    o_array = o.split("\n")
+    assert('bar: ["bar-uri", "http://hdl.handle.net/bar-handle?urlappend=/mode/thumb"]' == o_array[0])
+    assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle?urlappend=/mode/thumb -u image-thumbnail" == o_array[1])
+    assert('aspace-do-uri: success!' == o_array[2])
+    assert('foo: ["foo-uri", "http://hdl.handle.net/foo-handle?urlappend=/mode/thumb"]' == o_array[3])
+    assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle?urlappend=/mode/thumb -u image-thumbnail" == o_array[4])
+    assert('aspace-do-uri: success!' == o_array[5])
     assert(e == '')
   end
 end
