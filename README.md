@@ -31,5 +31,5 @@ dir2
 ```
 
 
-
-
+##### Testing:
+`$ rake`
