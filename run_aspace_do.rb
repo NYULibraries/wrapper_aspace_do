@@ -8,7 +8,7 @@ EXPECTED_ARG_COUNT = 3
 ALLOWED_USAGES = %w(audio-service video-service image-service image-thumbnail)
 DO_URI_FNAME   = 'archival_object_uri'
 HANDLE_FNAME   = 'handle'
-HANDLE_PREFIX  = 'http://hdl.handle.net/'
+HANDLE_PREFIX  = 'https://hdl.handle.net/'
 THUMBNAIL_URL_APPEND = '?urlappend=/mode/thumb'
 
 #------------------------------------------------------------------------------
