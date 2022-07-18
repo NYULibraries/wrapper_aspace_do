@@ -22,11 +22,11 @@ class RunAspaceDo < MiniTest::Test
     assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
 
     o_array = o.split("\n")
-    expected = 'bar: ["bar-uri", "http://hdl.handle.net/bar-handle"]' 
+    expected = 'bar: ["bar-uri", "https://hdl.handle.net/bar-handle"]' 
     actual   = o_array[0]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle -u audio-service"
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f https://hdl.handle.net/bar-handle -u audio-service"
     actual   = o_array[1]
     assert(expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
 
@@ -34,11 +34,11 @@ class RunAspaceDo < MiniTest::Test
     actual   = o_array[2]
     assert(expected == actual, "unexpected result: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = 'foo: ["foo-uri", "http://hdl.handle.net/foo-handle"]'
+    expected = 'foo: ["foo-uri", "https://hdl.handle.net/foo-handle"]'
     actual   = o_array[3]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle -u audio-service"
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f https://hdl.handle.net/foo-handle -u audio-service"
     actual   = o_array[4]
     assert(expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
 
@@ -55,11 +55,11 @@ class RunAspaceDo < MiniTest::Test
     assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
 
     o_array = o.split("\n")
-    expected = 'bar: ["bar-uri", "http://hdl.handle.net/bar-handle?urlappend=/mode/thumb"]'
+    expected = 'bar: ["bar-uri", "https://hdl.handle.net/bar-handle?urlappend=/mode/thumb"]'
     actual   = o_array[0]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle?urlappend=/mode/thumb -u image-thumbnail"
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f https://hdl.handle.net/bar-handle?urlappend=/mode/thumb -u image-thumbnail"
     actual   = o_array[1]
     assert(expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
 
@@ -67,11 +67,11 @@ class RunAspaceDo < MiniTest::Test
     actual   = o_array[2]
     assert(expected == actual, "unexpected result: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = 'foo: ["foo-uri", "http://hdl.handle.net/foo-handle?urlappend=/mode/thumb"]' 
+    expected = 'foo: ["foo-uri", "https://hdl.handle.net/foo-handle?urlappend=/mode/thumb"]' 
     actual   = o_array[3]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle?urlappend=/mode/thumb -u image-thumbnail" 
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f https://hdl.handle.net/foo-handle?urlappend=/mode/thumb -u image-thumbnail" 
     actual   = o_array[4]
     assert(expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
 
