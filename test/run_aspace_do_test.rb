@@ -20,14 +20,32 @@ class RunAspaceDo < MiniTest::Test
     env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
     o, e, s = Open3.capture3(env, "#{COMMAND} #{OK_WIP_LIST_FILE} 'audio-service' #{OK_WIP_PATH}")
     assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
+
     o_array = o.split("\n")
-    assert('bar: ["bar-uri", "http://hdl.handle.net/bar-handle"]' == o_array[0])
-    assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle -u audio-service" == o_array[1])
-    assert('aspace-do-uri: success!' == o_array[2])
-    assert('foo: ["foo-uri", "http://hdl.handle.net/foo-handle"]' == o_array[3])
-    assert("#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle -u audio-service" == o_array[4])
-    assert('aspace-do-uri: success!' == o_array[5])
-    assert(e == '')
+    expected = 'bar: ["bar-uri", "http://hdl.handle.net/bar-handle"]' 
+    actual   = o_array[0]
+    assert( expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
+
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a bar-uri -f http://hdl.handle.net/bar-handle -u audio-service"
+    actual   = o_array[1]
+    assert( expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
+
+    expected = 'aspace-do-uri: success!'
+    actual   = o_array[2]
+    assert( expected == actual, "unexpected result: expected: '#{expected}', actual: '#{actual}'")
+
+    expected = 'foo: ["foo-uri", "http://hdl.handle.net/foo-handle"]'
+    actual   = o_array[3]
+    assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
+
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f http://hdl.handle.net/foo-handle -u audio-service"
+    actual   = o_array[4]
+    assert( expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
+
+    expected = 'aspace-do-uri: success!'
+    actual   = o_array[5]
+    assert( expected == actual, "unexpected result: expected: '#{expected}', actual: '#{actual}'")
+    assert(e == '', "unexpected error output: expected '', actual: '#{e}'")
   end
 
   def test_valid_invocation_for_thumbnails
