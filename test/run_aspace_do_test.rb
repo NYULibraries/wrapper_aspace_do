@@ -16,6 +16,14 @@ class RunAspaceDo < MiniTest::Test
     assert_match(/incorrect number of arguments/, e)
   end
 
+  def test_with_invalid_use_statement
+    o, e, s = Open3.capture3("#{COMMAND} #{OK_WIP_LIST_FILE} 'this-is-not-a-valid-use-statement' #{OK_WIP_PATH}")
+    assert(s.exitstatus != 0)
+    assert(o == '')
+    assert_match(/Illegal argument/, e)
+    assert_match(/audio-service\nvideo-service\nimage-service\nimage-thumbnail\n/, e)
+  end
+
   def test_valid_invocation
     env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
     o, e, s = Open3.capture3(env, "#{COMMAND} #{OK_WIP_LIST_FILE} 'audio-service' #{OK_WIP_PATH}")

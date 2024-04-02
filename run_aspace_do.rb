@@ -48,7 +48,7 @@ end
 
 def assert_usage(usage)
   unless ALLOWED_USAGES.include?(usage)
-    raise "Illegal argument. Allowed values are: \n" + allowed.join("\n")
+    raise "Illegal argument. Allowed values are: \n" + ALLOWED_USAGES.join("\n")
   end 
 end
 
