@@ -11,8 +11,8 @@ HANDLE_FNAME   = 'handle'
 HANDLE_PREFIX  = 'https://hdl.handle.net/'
 THUMBNAIL_URL_APPEND = '?urlappend=/mode/thumb'
 
-PAUSE_DURATION_SECONDS = 2
-PAUSE_EVERY_N_OBJECTS = 3
+PAUSE_DURATION_SECONDS = 10
+PAUSE_EVERY_N_OBJECTS = 50
 
 #------------------------------------------------------------------------------
 # helper methods
