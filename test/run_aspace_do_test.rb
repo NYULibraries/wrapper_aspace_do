@@ -17,7 +17,8 @@ class RunAspaceDo < MiniTest::Test
   end
 
   def test_with_invalid_use_statement
-    o, e, s = Open3.capture3("#{COMMAND} #{OK_WIP_LIST_FILE} 'this-is-not-a-valid-use-statement' #{OK_WIP_PATH}")
+    env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
+    o, e, s = Open3.capture3(env, "#{COMMAND} #{OK_WIP_LIST_FILE} 'this-is-not-a-valid-use-statement' #{OK_WIP_PATH}")
     assert(s.exitstatus != 0)
     assert(o == '')
     assert_match(/Illegal argument/, e)
@@ -30,7 +31,7 @@ class RunAspaceDo < MiniTest::Test
     assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
 
     o_array = o.split("\n")
-    expected = 'bar: ["bar-uri", "https://hdl.handle.net/bar-handle"]' 
+    expected = 'bar: ["bar-uri", "https://hdl.handle.net/bar-handle"]'
     actual   = o_array[0]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
@@ -75,11 +76,11 @@ class RunAspaceDo < MiniTest::Test
     actual   = o_array[2]
     assert(expected == actual, "unexpected result: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = 'foo: ["foo-uri", "https://hdl.handle.net/foo-handle?urlappend=/mode/thumb"]' 
+    expected = 'foo: ["foo-uri", "https://hdl.handle.net/foo-handle?urlappend=/mode/thumb"]'
     actual   = o_array[3]
     assert(expected == actual, "unexpected handle output: expected: '#{expected}', actual: '#{actual}'")
 
-    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f https://hdl.handle.net/foo-handle?urlappend=/mode/thumb -u image-thumbnail" 
+    expected = "#{env['RUN_ASPACE_DO_UPDATER_PATH']} -a foo-uri -f https://hdl.handle.net/foo-handle?urlappend=/mode/thumb -u image-thumbnail"
     actual   = o_array[4]
     assert(expected == actual, "unexpected command string: expected: '#{expected}', actual: '#{actual}'")
 
