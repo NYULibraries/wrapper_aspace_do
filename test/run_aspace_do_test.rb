@@ -7,6 +7,8 @@ class RunAspaceDo < MiniTest::Test
 
   OK_WIP_LIST_FILE            = 'test/fixtures/wip-list-files/ok-wip-list.txt'
   OK_WIP_PATH                 = 'test/fixtures/ok-wips'
+  PAUSE_TEST_WIP_LIST_FILE    = 'test/fixtures/wip-list-files/pause-test-wip-list.txt'
+  PAUSE_TEST_WIP_PATH         = OK_WIP_PATH
 
   def test_with_incorrect_argument_count
     o, e, s = Open3.capture3("#{COMMAND}")
@@ -57,6 +59,29 @@ class RunAspaceDo < MiniTest::Test
 
     assert(e == '', "unexpected error output: expected '', actual: '#{e}'")
   end
+
+  def test_valid_invocation_with_pause
+    env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
+    o, e, s = Open3.capture3(env, "#{COMMAND} #{PAUSE_TEST_WIP_LIST_FILE} 'audio-service' #{PAUSE_TEST_WIP_PATH}")
+    # puts "#{COMMAND} #{PAUSE_TEST_WIP_LIST_FILE} 'audio-service' #{PAUSE_TEST_WIP_PATH}"
+    # puts '------------------------------------------------------------------------------'
+    # puts o
+    # puts '------------------------------------------------------------------------------'
+    # puts e
+    # puts '------------------------------------------------------------------------------'
+    # puts s
+    # puts '------------------------------------------------------------------------------'
+
+    assert(s.exitstatus == 0, "exit status: #{s.exitstatus}")
+
+    o_array = o.split("\n")
+    expected = '50: pausing for 10 seconds...'
+    actual   = o_array[150] # three lines per DO
+    assert(expected == actual, "unexpected output: expected: '#{expected}', actual: '#{actual}'")
+
+    assert(e == '', "unexpected error output: expected '', actual: '#{e}'")
+  end
+
 
   def test_valid_invocation_for_thumbnails
     env = {'RUN_ASPACE_DO_UPDATER_PATH' => 'test/mock_scripts/good-aspace-do-update'}
