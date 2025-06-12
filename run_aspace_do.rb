@@ -136,6 +136,7 @@ do_info.each_pair { |k,v|
   pause_count += 1
   if (pause_count % PAUSE_EVERY_N_OBJECTS) == 0
     puts "#{pause_count}: pausing for #{PAUSE_DURATION_SECONDS} seconds..."
+    $stdout.flush
     sleep PAUSE_DURATION_SECONDS
   end
 }
